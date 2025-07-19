@@ -1,16 +1,31 @@
-[gd_scene load_steps=4 format=3 uid="uid://qlr6k53fxjyt"]
+[gd_scene load_steps=9 format=3 uid="uid://qlr6k53fxjyt"]
 
+[ext_resource type="Script" uid="uid://0eyhqkbw2wv5" path="res://Combat/CombatBody2D.gd" id="1_e5ack"]
 [ext_resource type="Texture2D" uid="uid://bksd2qe7a4gj5" path="res://BallsAndPaddles/paddleRed.png" id="1_jdm2c"]
 [ext_resource type="Script" uid="uid://bwpm01rk0u5pd" path="res://BallsAndPaddles/PlayerMovement.gd" id="1_wdxe4"]
+[ext_resource type="Script" uid="uid://c5ki1ap4l3f7" path="res://Combat/CombatManager.gd" id="3_tky23"]
+[ext_resource type="Script" uid="uid://c4smjm87hr6nn" path="res://Combat/Health.gd" id="4_bx4cc"]
+[ext_resource type="Script" uid="uid://dsl7qj5naceqa" path="res://Debug/DamageLogger.gd" id="6_e23t2"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_wdxe4"]
-size = Vector2(104, 24)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tky23"]
+
+[sub_resource type="Resource" id="Resource_e23t2"]
+script = ExtResource("4_bx4cc")
+amount = 5.0
+metadata/_custom_type_script = "uid://c4smjm87hr6nn"
 
 [node name="Player_Paddle" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 0
 motion_mode = 1
 wall_min_slide_angle = 3.14159
 platform_on_leave = 2
 safe_margin = 0.2
+script = ExtResource("1_e5ack")
+metadata/_custom_type_script = "uid://0eyhqkbw2wv5"
+
+[node name="PlayerCollision" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_tky23")
 
 [node name="PlayerMovement" type="Node2D" parent="." node_paths=PackedStringArray("character_body")]
 script = ExtResource("1_wdxe4")
@@ -20,5 +35,12 @@ metadata/_custom_type_script = "uid://bwpm01rk0u5pd"
 [node name="PaddleRed" type="Sprite2D" parent="."]
 texture = ExtResource("1_jdm2c")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_wdxe4")
+[node name="DamageLogger" type="Node2D" parent="." node_paths=PackedStringArray("combat_manager")]
+script = ExtResource("6_e23t2")
+combat_manager = NodePath("../CombatManager")
+metadata/_custom_type_script = "uid://dsl7qj5naceqa"
+
+[node name="CombatManager" type="Node2D" parent="."]
+script = ExtResource("3_tky23")
+health_res = SubResource("Resource_e23t2")
+metadata/_custom_type_script = "uid://c5ki1ap4l3f7"
