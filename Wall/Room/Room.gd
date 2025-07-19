@@ -6,8 +6,8 @@ enum RoomType{
 	Narrow = 2
 }
 @export var room_type: RoomType = RoomType.Square
-@export var min_x: float = 0
-@export var max_x: float = 0
+@export var min_x: float = min_default
+@export var max_x: float = max_default
 
 const min_default: float = -560
 const max_default: float = 560

@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://dsl7qj5naceqa" path="res://Debug/DamageLogger.gd" id="6_e23t2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tky23"]
+size = Vector2(26, 6)
 
 [sub_resource type="Resource" id="Resource_e23t2"]
 script = ExtResource("4_bx4cc")
@@ -30,9 +31,11 @@ shape = SubResource("RectangleShape2D_tky23")
 [node name="PlayerMovement" type="Node2D" parent="." node_paths=PackedStringArray("character_body")]
 script = ExtResource("1_wdxe4")
 character_body = NodePath("..")
+speed = 200.0
 metadata/_custom_type_script = "uid://bwpm01rk0u5pd"
 
 [node name="PaddleRed" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
 texture = ExtResource("1_jdm2c")
 
 [node name="DamageLogger" type="Node2D" parent="." node_paths=PackedStringArray("combat_manager")]

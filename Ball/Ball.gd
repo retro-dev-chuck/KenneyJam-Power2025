@@ -1,11 +1,13 @@
 class_name Ball extends CharacterBody2D
 
-
 @export var speed: float = 300.0
-var v: Vector2 = Vector2(1, -1).normalized()
+@export var damage: Damage
 
+var v: Vector2 = Vector2(1, -1).normalized()
+var current_damage: Damage
 
 func _ready() -> void:
+	current_damage = damage.duplicate(true)
 	velocity = v
 
 func _physics_process(delta: float) -> void:
@@ -18,7 +20,9 @@ func _physics_process(delta: float) -> void:
 		
 func handle_bounce(collision: KinematicCollision2D) -> void:
 	velocity = velocity.bounce(collision.get_normal())
-	push_error("BOUNC")
 	var collider = collision.get_collider()
-	if collider.has_method("apply_damage"):
-		collider.call("apply_damage", 1) 
+	if collider.has_method("damage"):
+		print("damage found " + str(collider))
+		collider.damage(current_damage)
+	else:
+		print("damage not found " + str(collider))

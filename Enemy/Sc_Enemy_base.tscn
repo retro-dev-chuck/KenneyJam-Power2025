@@ -1,0 +1,43 @@
+[gd_scene load_steps=9 format=3 uid="uid://dgdj1sj4jpkbt"]
+
+[ext_resource type="Script" uid="uid://0eyhqkbw2wv5" path="res://Combat/CombatBody2D.gd" id="1_4k16q"]
+[ext_resource type="Texture2D" uid="uid://qstcirkv2mbb" path="res://Wall/Room/monochrome_tilemap.png" id="2_f0uko"]
+[ext_resource type="Script" uid="uid://c5ki1ap4l3f7" path="res://Combat/CombatManager.gd" id="3_4k16q"]
+[ext_resource type="Script" uid="uid://c4smjm87hr6nn" path="res://Combat/Health.gd" id="4_p171j"]
+[ext_resource type="Script" uid="uid://dsl7qj5naceqa" path="res://Debug/DamageLogger.gd" id="5_p171j"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4k16q"]
+size = Vector2(16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p171j"]
+atlas = ExtResource("2_f0uko")
+region = Rect2(187, 0, 16, 16)
+
+[sub_resource type="Resource" id="Resource_jtrj2"]
+script = ExtResource("4_p171j")
+amount = 5.0
+metadata/_custom_type_script = "uid://c4smjm87hr6nn"
+
+[node name="Enemy_Base" type="CharacterBody2D" node_paths=PackedStringArray("combat_manager")]
+collision_layer = 8
+collision_mask = 13
+script = ExtResource("1_4k16q")
+combat_manager = NodePath("CombatManager")
+metadata/_custom_type_script = "uid://0eyhqkbw2wv5"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_4k16q")
+
+[node name="Sprite2D" type="Sprite2D" parent="CollisionShape2D"]
+texture = SubResource("AtlasTexture_p171j")
+
+[node name="CombatManager" type="Node2D" parent="." node_paths=PackedStringArray("target")]
+script = ExtResource("3_4k16q")
+target = NodePath("..")
+health_res = SubResource("Resource_jtrj2")
+metadata/_custom_type_script = "uid://c5ki1ap4l3f7"
+
+[node name="DamageLogger" type="Node2D" parent="." node_paths=PackedStringArray("combat_manager")]
+script = ExtResource("5_p171j")
+combat_manager = NodePath("../CombatManager")
+metadata/_custom_type_script = "uid://dsl7qj5naceqa"
