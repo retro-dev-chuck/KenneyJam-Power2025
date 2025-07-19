@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 RoomManager="*res://Globals/RoomManagerSc.gd"
 DamageNumbers="*res://Globals/DamageNumbersSc.gd"
+Shaker="*res://addons/shaker/src/Shaker.gd"
 
 [display]
 
@@ -31,7 +32,7 @@ window/stretch/scale_mode="integer"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/anthonyec.camera_preview/plugin.cfg")
+enabled=PackedStringArray("res://addons/anthonyec.camera_preview/plugin.cfg", "res://addons/shaker/plugin.cfg")
 
 [input]
 

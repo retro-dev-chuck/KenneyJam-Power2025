@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://qlr6k53fxjyt"]
 
-[ext_resource type="Script" uid="uid://0eyhqkbw2wv5" path="res://Combat/CombatBody2D.gd" id="1_e5ack"]
+[ext_resource type="Script" uid="uid://b34sjsjxtyh3o" path="res://Player/PlayerPaddle.gd" id="1_e23t2"]
 [ext_resource type="Texture2D" uid="uid://bksd2qe7a4gj5" path="res://BallsAndPaddles/paddleRed.png" id="1_jdm2c"]
 [ext_resource type="Script" uid="uid://bwpm01rk0u5pd" path="res://BallsAndPaddles/PlayerMovement.gd" id="1_wdxe4"]
 [ext_resource type="Script" uid="uid://c5ki1ap4l3f7" path="res://Combat/CombatManager.gd" id="3_tky23"]
@@ -15,15 +15,16 @@ script = ExtResource("4_bx4cc")
 amount = 5.0
 metadata/_custom_type_script = "uid://c4smjm87hr6nn"
 
-[node name="Player_Paddle" type="CharacterBody2D"]
+[node name="Player_Paddle" type="CharacterBody2D" node_paths=PackedStringArray("combat_manager")]
 collision_layer = 2
 collision_mask = 23
 motion_mode = 1
 wall_min_slide_angle = 3.14159
 platform_on_leave = 2
 safe_margin = 0.2
-script = ExtResource("1_e5ack")
-metadata/_custom_type_script = "uid://0eyhqkbw2wv5"
+script = ExtResource("1_e23t2")
+combat_manager = NodePath("CombatManager")
+metadata/_custom_type_script = "uid://b34sjsjxtyh3o"
 
 [node name="PlayerCollision" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_tky23")
@@ -43,7 +44,8 @@ script = ExtResource("6_e23t2")
 combat_manager = NodePath("../CombatManager")
 metadata/_custom_type_script = "uid://dsl7qj5naceqa"
 
-[node name="CombatManager" type="Node2D" parent="."]
+[node name="CombatManager" type="Node2D" parent="." node_paths=PackedStringArray("target")]
 script = ExtResource("3_tky23")
+target = NodePath("..")
 health_res = SubResource("Resource_e23t2")
 metadata/_custom_type_script = "uid://c5ki1ap4l3f7"
