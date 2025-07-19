@@ -31,4 +31,4 @@ func _on_room_updated(room: Room) -> void:
 	else:
 		min = Room.min_default
 		max = Room.max_default
-	push_error(str(min) + "=" + str(max))
+	push_warning(str(min) + "=" + str(max))

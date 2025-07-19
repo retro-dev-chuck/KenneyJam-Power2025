@@ -15,8 +15,8 @@ amount = 5.0
 metadata/_custom_type_script = "uid://c4smjm87hr6nn"
 
 [node name="Player_Paddle" type="CharacterBody2D"]
-collision_layer = 0
-collision_mask = 0
+collision_layer = 2
+collision_mask = 23
 motion_mode = 1
 wall_min_slide_angle = 3.14159
 platform_on_leave = 2
