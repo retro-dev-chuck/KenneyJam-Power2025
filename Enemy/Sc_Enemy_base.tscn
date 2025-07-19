@@ -33,6 +33,7 @@ shape = SubResource("RectangleShape2D_4k16q")
 texture = SubResource("AtlasTexture_p171j")
 
 [node name="CombatManager" type="Node2D" parent="." node_paths=PackedStringArray("target")]
+position = Vector2(0, -8)
 script = ExtResource("3_4k16q")
 target = NodePath("..")
 health_res = SubResource("Resource_jtrj2")
