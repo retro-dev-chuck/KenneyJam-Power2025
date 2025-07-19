@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://dpq78r3dpp5e7"]
+
+[ext_resource type="Texture2D" uid="uid://coa4by1hsham7" path="res://Bricks/BrickSprites/element_blue_square.png" id="1_mpcvu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ui4n7"]
+size = Vector2(32, 32)
+
+[node name="Brick_Default" type="Node2D"]
+
+[node name="AnimatableBody2D" type="AnimatableBody2D" parent="."]
+position = Vector2(124, 344)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatableBody2D"]
+shape = SubResource("RectangleShape2D_ui4n7")
+debug_color = Color(0.581673, 0.381978, 1, 0.42)
+
+[node name="Sprite" type="Sprite2D" parent="AnimatableBody2D"]
+texture = ExtResource("1_mpcvu")

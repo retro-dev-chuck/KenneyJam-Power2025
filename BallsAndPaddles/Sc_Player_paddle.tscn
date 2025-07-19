@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://qlr6k53fxjyt"]
+
+[ext_resource type="Texture2D" uid="uid://bksd2qe7a4gj5" path="res://BallsAndPaddles/paddleRed.png" id="1_jdm2c"]
+[ext_resource type="Script" uid="uid://bwpm01rk0u5pd" path="res://BallsAndPaddles/PlayerMovement.gd" id="1_wdxe4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wdxe4"]
+size = Vector2(104, 24)
+
+[node name="Player_Paddle" type="CharacterBody2D"]
+motion_mode = 1
+wall_min_slide_angle = 3.14159
+platform_on_leave = 2
+safe_margin = 0.2
+
+[node name="PlayerMovement" type="Node2D" parent="." node_paths=PackedStringArray("character_body")]
+script = ExtResource("1_wdxe4")
+character_body = NodePath("..")
+metadata/_custom_type_script = "uid://bwpm01rk0u5pd"
+
+[node name="PaddleRed" type="Sprite2D" parent="."]
+texture = ExtResource("1_jdm2c")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_wdxe4")

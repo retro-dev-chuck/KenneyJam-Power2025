@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://70llbdht1p16"]
+
+[ext_resource type="PackedScene" uid="uid://qlr6k53fxjyt" path="res://BallsAndPaddles/Sc_Player_paddle.tscn" id="1_k4ptf"]
+[ext_resource type="Texture2D" uid="uid://cisvittsinugx" path="res://Bricks/BrickSprites/element_grey_square.png" id="1_rtlr1"]
+
+[node name="Game" type="Node2D"]
+
+[node name="RoomBg" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="RoomBg"]
+self_modulate = Color(0.111197, 0.111197, 0.111197, 1)
+scale = Vector2(100, 100)
+texture = ExtResource("1_rtlr1")
+
+[node name="Player_Paddle" parent="." instance=ExtResource("1_k4ptf")]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, -400)
