@@ -8,8 +8,8 @@ func _ready() -> void:
 	if not combat_manager.owner:
 		push_error("Combat manager owner is null!")
 	
-func _on_damaged(amount: float) -> void:
-	DamageNumbers.display_number(amount, global_position)
+func _on_damaged(amount: float, pos: Vector2) -> void:
+	DamageNumbers.display_number(amount, pos)
 
-func _on_died(amount: float) -> void:
-	DamageNumbers.display_number(amount, global_position)
+func _on_died(amount: float, pos: Vector2) -> void:
+	DamageNumbers.display_number(amount, pos)

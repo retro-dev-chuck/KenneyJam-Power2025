@@ -23,6 +23,6 @@ func handle_bounce(collision: KinematicCollision2D) -> void:
 	var collider = collision.get_collider()
 	if collider.has_method("damage"):
 		print("damage found " + str(collider))
-		collider.damage(current_damage)
+		collider.damage(current_damage, collision.get_position())
 	else:
 		print("damage not found " + str(collider))

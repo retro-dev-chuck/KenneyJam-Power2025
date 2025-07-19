@@ -7,5 +7,5 @@ func _ready() -> void:
 	if not combat_manager.owner:
 		push_error("Combat manager owner is null!")
 	
-func _on_damaged(amount: float) -> void:
+func _on_damaged(amount: float, pos: Vector2) -> void:
 	push_warning(combat_manager.target.name + " damaged " + String.num(amount, 1))
