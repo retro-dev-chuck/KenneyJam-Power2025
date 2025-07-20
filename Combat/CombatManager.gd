@@ -14,14 +14,14 @@ var current_hp: Health
 func _ready() -> void:
 	current_hp = health_res.duplicate(true)
 	
-func apply_damage(damage: Damage, pos: Vector2) -> void:
+func apply_damage(damage: float, pos: Vector2) -> void:
 	if current_hp.amount == 0:
 		return
 	var pre_amount: float = current_hp.amount
-	current_hp.amount = max(0, current_hp.amount - damage.amount)
+	current_hp.amount = max(0, current_hp.amount - damage)
 	on_health_updated.emit(current_hp.amount)
 	if current_hp.amount == 0:
 		on_pre_death.emit()
-		on_died.emit(pre_amount, pos)
+		on_died.emit(damage, pos)
 	elif pre_amount != current_hp.amount:
-		on_damaged.emit(pre_amount - current_hp.amount, pos)
+		on_damaged.emit(damage, pos)

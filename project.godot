@@ -23,6 +23,7 @@ Shaker="*res://addons/shaker/src/Shaker.gd"
 EventBus="*res://Globals/EventBusSc.gd"
 State="*res://Globals/StateSc.gd"
 SaveManager="*res://Globals/SaveManagerSc.gd"
+Upgrade="*res://Upgrades/UpgradeSc.gd"
 
 [display]
 

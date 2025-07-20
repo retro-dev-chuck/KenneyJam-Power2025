@@ -19,6 +19,8 @@ var bounce_cooldown: float = 0.0
 var _can_control: bool = false
 var init_pos: Vector2
 
+var bounces_since_last_touch: int = 0
+
 func _ready() -> void:
 	init_pos = global_position
 	current_damage = damage.duplicate(true)
@@ -32,7 +34,7 @@ func _ready() -> void:
 		add_child(player)
 		audio_pool.append(player)
 
-func _reset_pos(r: Room) -> void:
+func _reset_pos(_r: Room) -> void:
 	global_position = init_pos
 
 func _disable() -> void:
@@ -52,12 +54,22 @@ func _physics_process(delta: float) -> void:
 		return
 	if bounce_cooldown > 0.0:
 		bounce_cooldown -= delta
-	var collision = move_and_collide(velocity * speed * delta, true)
+	var collision = move_and_collide(velocity * _speed() * delta, true)
 	if collision:
 		_handle_bounce(collision)
 	else:
-		move_and_collide(velocity * speed * delta)
-		
+		move_and_collide(velocity * _speed() * delta)
+
+func _speed() -> float:
+	var result: float = speed
+	for i in range(Upgrade.upgrade_heavy):
+		result = result * 0.75
+	return result		
+
+func get_damage() -> float:
+	var result: float = current_damage.amount
+	result = result + Upgrade.upgrade_heavy + bounces_since_last_touch * 0.25 * Upgrade.upgrade_bounce
+	return result
 		
 func _handle_bounce(collision: KinematicCollision2D) -> void:
 	var collider = collision.get_collider()
@@ -87,16 +99,17 @@ func _handle_bounce(collision: KinematicCollision2D) -> void:
 		global_position.y -= 3.0
 		
 		play_sound(paddle_bounce_sfx)
-		
+		bounces_since_last_touch = 0
 		if not damage_shake.is_playing and not bounce_shake.is_playing:
 			bounce_shake.play_shake()
 		bounce_cooldown = 0.3 
 			
 	else:
 		velocity = velocity.bounce(collision.get_normal())
+		bounces_since_last_touch += 1
 		if collider.has_method("damage"):
-			print("damage found " + str(collider))
-			collider.damage(current_damage, collision.get_position())
+			print("damage found " + str(get_damage()))
+			collider.damage(get_damage(), collision.get_position())
 			if not damage_shake.is_playing and not bounce_shake.is_playing:
 				damage_shake.play_shake()
 		else:
