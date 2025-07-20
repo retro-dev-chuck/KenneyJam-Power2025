@@ -3,8 +3,8 @@ class_name PlayerMovement extends Node2D
 @export var character_body: CharacterBody2D
 @export var speed = 800.0
 
-var min: float = Room.min_default
-var max: float = Room.max_default
+var _min: float = Room.min_default
+var _max: float = Room.max_default
 var calculated_velocity: Vector2 = Vector2.ZERO
 
 func _ready() -> void:
@@ -18,10 +18,10 @@ func _physics_process(delta: float) -> void:
 	else:
 		character_body.velocity.x = move_toward(character_body.velocity.x, 0, speed)
 
-	if character_body.velocity.x > 0 and character_body.position.x + character_body.velocity.x * delta > max:
+	if character_body.velocity.x > 0 and character_body.position.x + character_body.velocity.x * delta > _max:
 		character_body.velocity.x = 0
 		
-	if character_body.velocity.x < 0 and character_body.position.x + character_body.velocity.x * delta < min:
+	if character_body.velocity.x < 0 and character_body.position.x + character_body.velocity.x * delta < _min:
 		character_body.velocity.x = 0
 		
 	calculated_velocity = character_body.velocity
@@ -30,9 +30,8 @@ func _physics_process(delta: float) -> void:
 
 func _on_room_updated(room: Room) -> void:
 	if room:
-		min = room.get_min()
-		max = room.get_max()
+		_min = room.get__min()
+		_max = room.get__max()
 	else:
-		min = Room.min_default
-		max = Room.max_default
-	push_warning(str(min) + "=" + str(max))
+		_min = Room.min_default
+		_max = Room.max_default

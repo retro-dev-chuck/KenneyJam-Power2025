@@ -1,13 +1,14 @@
-[gd_scene load_steps=14 format=3 uid="uid://dgdj1sj4jpkbt"]
+[gd_scene load_steps=15 format=3 uid="uid://dgdj1sj4jpkbt"]
 
 [ext_resource type="Script" uid="uid://0eyhqkbw2wv5" path="res://Combat/CombatBody2D.gd" id="1_4k16q"]
-[ext_resource type="Texture2D" uid="uid://qstcirkv2mbb" path="res://Wall/Room/monochrome_tilemap.png" id="2_f0uko"]
+[ext_resource type="Texture2D" uid="uid://qstcirkv2mbb" path="res://Wall/monochrome_tilemap.png" id="2_f0uko"]
 [ext_resource type="Script" uid="uid://c5ki1ap4l3f7" path="res://Combat/CombatManager.gd" id="3_4k16q"]
 [ext_resource type="Script" uid="uid://c4smjm87hr6nn" path="res://Combat/Health.gd" id="4_p171j"]
 [ext_resource type="Script" uid="uid://dsl7qj5naceqa" path="res://Debug/DamageLogger.gd" id="5_p171j"]
 [ext_resource type="Script" uid="uid://ded4fkxnl8esp" path="res://Polish/CombatNumber.gd" id="6_jtrj2"]
 [ext_resource type="Script" uid="uid://cxq4prg10k3l4" path="res://Combat/HealthBar.gd" id="7_43i6p"]
 [ext_resource type="Script" uid="uid://d0r2lbfgpk48w" path="res://Combat/FreeOnDeath.gd" id="8_da1ro"]
+[ext_resource type="Script" uid="uid://cp7l37nmi3vw6" path="res://Enemy/EnemyPreDeathEventTrigger.gd" id="9_qilw8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4k16q"]
 size = Vector2(16, 16)
@@ -77,3 +78,7 @@ script = ExtResource("8_da1ro")
 combat_manager = NodePath("../CombatManager")
 free_target = NodePath("..")
 metadata/_custom_type_script = "uid://d0r2lbfgpk48w"
+
+[node name="EnemyPreDeathEventTrigger" type="Node2D" parent="."]
+script = ExtResource("9_qilw8")
+metadata/_custom_type_script = "uid://cp7l37nmi3vw6"

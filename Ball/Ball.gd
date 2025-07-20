@@ -39,14 +39,12 @@ func _physics_process(delta: float) -> void:
 		
 func _handle_bounce(collision: KinematicCollision2D) -> void:
 	var collider = collision.get_collider()
-	var has_just_damaged: bool = false
+	
 	if collider is PlayerPaddle:
-		push_error("PADDLE")
 		if bounce_cooldown > 0.0:
 			return
 		
 		var paddle: PlayerPaddle = collider
-		print("size:"+str(paddle.width()))
 		var paddle_width = paddle.width()
 		var paddle_left = paddle.global_position.x - (paddle_width / 2.0)
 		var d: float = (collision.get_position().x - paddle_left) / paddle_width
@@ -65,20 +63,20 @@ func _handle_bounce(collision: KinematicCollision2D) -> void:
 			velocity.y = -0.2  # force it to go up
 		velocity = velocity.normalized()
 		global_position.y -= 3.0
+		
+		play_sound(paddle_bounce_sfx)
+		
 		if not damage_shake.is_playing and not bounce_shake.is_playing:
 			bounce_shake.play_shake()
 		bounce_cooldown = 0.3 
 			
 	else:
-		push_error("NOT PADDLE")
-		
 		velocity = velocity.bounce(collision.get_normal())
 		if collider.has_method("damage"):
 			print("damage found " + str(collider))
 			collider.damage(current_damage, collision.get_position())
 			if not damage_shake.is_playing and not bounce_shake.is_playing:
 				damage_shake.play_shake()
-			has_just_damaged = true
 		else:
 			print("damage not found " + str(collider))
 			

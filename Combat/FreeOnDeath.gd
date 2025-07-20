@@ -7,5 +7,5 @@ func _ready() -> void:
 	combat_manager.on_died.connect(_on_dead)
 	
 	
-func _on_dead(amount: float, pos: Vector2) -> void:
+func _on_dead(_amount: float, _pos: Vector2) -> void:
 	free_target.queue_free()

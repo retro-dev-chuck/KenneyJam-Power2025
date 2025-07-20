@@ -5,13 +5,10 @@ const anim_out_dur: float = 0.35
 const move_offset: float = 10
 const offset: Vector2 = Vector2(0, -15)
 
-func _input(event: InputEvent) -> void:
-	if Input.is_action_just_pressed("Interact"):
-		display_number(4, Vector2.UP *20)
 
-func display_number(value: float, position: Vector2, is_critical:bool = false) -> void:
+func display_number(value: float, _position: Vector2, is_critical:bool = false) -> void:
 	var number = Label.new()
-	number.global_position = position + offset
+	number.global_position = _position + offset
 	number.text = String.num(value, 1)
 	number.z_index = 100
 	number.label_settings = LabelSettings.new()
