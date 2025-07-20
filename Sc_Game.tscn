@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://70llbdht1p16"]
+[gd_scene load_steps=23 format=4 uid="uid://70llbdht1p16"]
 
 [ext_resource type="PackedScene" uid="uid://qlr6k53fxjyt" path="res://BallsAndPaddles/Sc_Player_paddle.tscn" id="1_k4ptf"]
 [ext_resource type="Script" uid="uid://cgce51an1tusg" path="res://Room/RoomTransition.gd" id="1_lr1gu"]
@@ -15,6 +15,8 @@
 [ext_resource type="Script" uid="uid://cvjxliomyamki" path="res://Tutorial/Story/Story.gd" id="11_hqqmn"]
 [ext_resource type="LabelSettings" uid="uid://b5cgn6eimk500" path="res://PlaceName/LabelSettings.tres" id="14_kll0j"]
 [ext_resource type="Script" uid="uid://l7i61iddc0nh" path="res://Room/DoorSelectText.gd" id="15_i3lgx"]
+[ext_resource type="LabelSettings" uid="uid://r5nmdnb1lcg5" path="res://_AllRooms/Black_label.tres" id="16_lttub"]
+[ext_resource type="FontFile" uid="uid://d0so0m7o3ud3p" path="res://Minecraft.ttf" id="17_mum10"]
 
 [sub_resource type="Resource" id="Resource_i3lgx"]
 script = ExtResource("6_7pce6")
@@ -63,6 +65,11 @@ ScaleShake = Array[ExtResource("5_hqqmn")]([])
 bake_internal = 64
 __follow_timeline = false
 metadata/_custom_type_script = "uid://cc133inw66me8"
+
+[sub_resource type="LabelSettings" id="LabelSettings_p81hm"]
+font = ExtResource("17_mum10")
+font_size = 12
+font_color = Color(0, 0, 0, 1)
 
 [node name="Game" type="Node2D"]
 
@@ -119,7 +126,7 @@ script = ExtResource("11_hqqmn")
 ui = NodePath("../Story_CanvasLayer")
 metadata/_custom_type_script = "uid://cvjxliomyamki"
 
-[node name="Label_DoorSelect" type="Label" parent="."]
+[node name="DoorSelect_Label" type="Label" parent="."]
 visible = false
 offset_left = -53.0
 offset_top = -236.0
@@ -132,3 +139,112 @@ horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("15_i3lgx")
 metadata/_custom_type_script = "uid://l7i61iddc0nh"
+
+[node name="PowerUp_CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PanelContainer" type="PanelContainer" parent="PowerUp_CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="PowerUp_CanvasLayer/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PowerUp_CanvasLayer/PanelContainer/Panel"]
+layout_mode = 2
+offset_left = -240.0
+offset_top = -92.0
+offset_right = 240.0
+offset_bottom = 58.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="InnerGrowth" type="ColorRect" parent="PowerUp_CanvasLayer/PanelContainer/Panel/HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+
+[node name="Title" type="Label" parent="PowerUp_CanvasLayer/PanelContainer/Panel/HBoxContainer/InnerGrowth"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 8.0
+offset_right = 94.0
+offset_bottom = 31.0
+text = "Inner Growth"
+label_settings = ExtResource("16_lttub")
+
+[node name="Explanation" type="Label" parent="PowerUp_CanvasLayer/PanelContainer/Panel/HBoxContainer/InnerGrowth"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 29.0
+offset_right = 94.0
+offset_bottom = 52.0
+text = "Each bounce
+increases
+damage by
+0.25. Bonus
+resets if you
+touch paddle."
+label_settings = SubResource("LabelSettings_p81hm")
+
+[node name="Sanic" type="ColorRect" parent="PowerUp_CanvasLayer/PanelContainer/Panel/HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+
+[node name="Title" type="Label" parent="PowerUp_CanvasLayer/PanelContainer/Panel/HBoxContainer/Sanic"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 8.0
+offset_right = 94.0
+offset_bottom = 31.0
+text = "Sanic"
+label_settings = ExtResource("16_lttub")
+
+[node name="Explanation" type="Label" parent="PowerUp_CanvasLayer/PanelContainer/Panel/HBoxContainer/Sanic"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 29.0
+offset_right = 94.0
+offset_bottom = 52.0
+text = "Speed Up x1.25"
+label_settings = SubResource("LabelSettings_p81hm")
+
+[node name="HeavyWeight" type="ColorRect" parent="PowerUp_CanvasLayer/PanelContainer/Panel/HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+
+[node name="Title" type="Label" parent="PowerUp_CanvasLayer/PanelContainer/Panel/HBoxContainer/HeavyWeight"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 8.0
+offset_right = 94.0
+offset_bottom = 31.0
+text = "Heavy Weight"
+label_settings = ExtResource("16_lttub")
+
+[node name="Explanation" type="Label" parent="PowerUp_CanvasLayer/PanelContainer/Panel/HBoxContainer/HeavyWeight"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 29.0
+offset_right = 94.0
+offset_bottom = 52.0
+text = "Ball Damage +1
+Ball Speed x0.75"
+label_settings = SubResource("LabelSettings_p81hm")
+
+[node name="Label" type="Label" parent="PowerUp_CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -62.0
+offset_top = 22.0
+offset_right = 63.0
+offset_bottom = 45.0
+grow_horizontal = 2
+text = "Select a Power-Up"
+label_settings = ExtResource("14_kll0j")
