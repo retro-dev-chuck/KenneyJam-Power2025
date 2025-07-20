@@ -189,8 +189,7 @@ offset_bottom = 52.0
 mouse_filter = 1
 text = "Each bounce
 increases
-damage by
-0.25. Bonus
+damage. Bonus
 resets if you
 touch paddle."
 label_settings = SubResource("LabelSettings_p81hm")

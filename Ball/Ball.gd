@@ -108,13 +108,10 @@ func _handle_bounce(collision: KinematicCollision2D) -> void:
 		velocity = velocity.bounce(collision.get_normal())
 		bounces_since_last_touch += 1
 		if collider.has_method("damage"):
-			print("damage found " + str(get_damage()))
 			collider.damage(get_damage(), collision.get_position())
 			if not damage_shake.is_playing and not bounce_shake.is_playing:
 				damage_shake.play_shake()
 		else:
-			print("damage not found " + str(collider))
-			
 			play_sound(regular_bounce_sfx)
 			if not damage_shake.is_playing and not bounce_shake.is_playing:
 				bounce_shake.play_shake()
