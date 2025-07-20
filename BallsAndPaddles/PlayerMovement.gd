@@ -5,6 +5,7 @@ class_name PlayerMovement extends Node2D
 
 var min: float = Room.min_default
 var max: float = Room.max_default
+var calculated_velocity: Vector2 = Vector2.ZERO
 
 func _ready() -> void:
 	RoomManager.room_updated.connect(_on_room_updated)
@@ -22,6 +23,9 @@ func _physics_process(delta: float) -> void:
 		
 	if character_body.velocity.x < 0 and character_body.position.x + character_body.velocity.x * delta < min:
 		character_body.velocity.x = 0
+		
+	calculated_velocity = character_body.velocity
+
 	character_body.move_and_slide()
 
 func _on_room_updated(room: Room) -> void:

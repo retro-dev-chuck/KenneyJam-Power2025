@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://cpsamb63mjcc3"]
+
+[ext_resource type="Script" uid="uid://dkkkm4dfdqgpv" path="res://Door/Door.gd" id="1_3l55v"]
+[ext_resource type="Texture2D" uid="uid://qstcirkv2mbb" path="res://Wall/Room/monochrome_tilemap.png" id="2_6inil"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hrmm3"]
+atlas = ExtResource("2_6inil")
+region = Rect2(289, 34, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m1k8a"]
+atlas = ExtResource("2_6inil")
+region = Rect2(272, 34, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iwvt8"]
+atlas = ExtResource("2_6inil")
+region = Rect2(306, 34, 16, 16)
+
+[node name="Door" type="Node2D"]
+script = ExtResource("1_3l55v")
+metadata/_custom_type_script = "uid://dkkkm4dfdqgpv"
+
+[node name="DoorLocked" type="Sprite2D" parent="."]
+visible = false
+texture = SubResource("AtlasTexture_hrmm3")
+
+[node name="DoorClosed" type="Sprite2D" parent="."]
+visible = false
+texture = SubResource("AtlasTexture_m1k8a")
+
+[node name="DoorOpen" type="Sprite2D" parent="."]
+visible = false
+texture = SubResource("AtlasTexture_iwvt8")

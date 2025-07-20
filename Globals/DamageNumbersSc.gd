@@ -10,7 +10,6 @@ func _input(event: InputEvent) -> void:
 		display_number(4, Vector2.UP *20)
 
 func display_number(value: float, position: Vector2, is_critical:bool = false) -> void:
-	push_error("AAAAAAAA")
 	var number = Label.new()
 	number.global_position = position + offset
 	number.text = String.num(value, 1)

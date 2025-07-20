@@ -14,7 +14,7 @@ var current_damage: Damage
 @export var max_simultaneous_bounces: int = 5
 var audio_pool: Array[AudioStreamPlayer2D] = []
 var audio_index := 0
-
+var bounce_cooldown: float = 0.0
 
 func _ready() -> void:
 	current_damage = damage.duplicate(true)
@@ -28,6 +28,8 @@ func _ready() -> void:
 		audio_pool.append(player)
 
 func _physics_process(delta: float) -> void:
+	if bounce_cooldown > 0.0:
+		bounce_cooldown -= delta
 	var collision = move_and_collide(velocity * speed * delta, true)
 	if collision:
 		_handle_bounce(collision)
@@ -36,26 +38,41 @@ func _physics_process(delta: float) -> void:
 		
 		
 func _handle_bounce(collision: KinematicCollision2D) -> void:
-	velocity = velocity.bounce(collision.get_normal())
 	var collider = collision.get_collider()
 	var has_just_damaged: bool = false
 	if collider is PlayerPaddle:
+		push_error("PADDLE")
+		if bounce_cooldown > 0.0:
+			return
+		
 		var paddle: PlayerPaddle = collider
-
-		var offset = (global_position.x - paddle.global_position.x) / (paddle.size() / 2.0)
-		offset = clamp(offset, -1.0, 1.0)
-
-		var max_bounce_angle = deg_to_rad(60)
-		var angle = lerp(-max_bounce_angle, max_bounce_angle, (offset + 1.0) / 2.0)
-
-		velocity = Vector2(cos(angle), -sin(angle)).normalized()
+		print("size:"+str(paddle.width()))
+		var paddle_width = paddle.width()
+		var paddle_left = paddle.global_position.x - (paddle_width / 2.0)
+		var d: float = (collision.get_position().x - paddle_left) / paddle_width
+		d = clamp(d, 0.0, 1.0)
 		
-		play_sound(paddle_bounce_sfx)
+		var base_angle = (d - 0.5) * PI / 2.0  # -π/4 to +π/4
 		
+		var paddle_velocity_x = paddle.calculated_velocity_x()
+		var influence = clamp(paddle_velocity_x * 0.002, -0.3, 0.3)  # ~±17°
+		var angle = base_angle + influence
+		
+		# Set new ball direction upward at the final angle
+		velocity = Vector2(sin(angle), -cos(angle)).normalized()
+		
+		if abs(velocity.y) < 0.2:
+			velocity.y = -0.2  # force it to go up
+		velocity = velocity.normalized()
+		global_position.y -= 3.0
 		if not damage_shake.is_playing and not bounce_shake.is_playing:
 			bounce_shake.play_shake()
+		bounce_cooldown = 0.3 
 			
 	else:
+		push_error("NOT PADDLE")
+		
+		velocity = velocity.bounce(collision.get_normal())
 		if collider.has_method("damage"):
 			print("damage found " + str(collider))
 			collider.damage(current_damage, collision.get_position())
