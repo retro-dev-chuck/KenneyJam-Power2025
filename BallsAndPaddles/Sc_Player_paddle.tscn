@@ -32,7 +32,7 @@ shape = SubResource("RectangleShape2D_tky23")
 [node name="PlayerMovement" type="Node2D" parent="." node_paths=PackedStringArray("character_body")]
 script = ExtResource("1_wdxe4")
 character_body = NodePath("..")
-speed = 350.0
+speed = 165.0
 metadata/_custom_type_script = "uid://bwpm01rk0u5pd"
 
 [node name="PaddleRed" type="Sprite2D" parent="."]

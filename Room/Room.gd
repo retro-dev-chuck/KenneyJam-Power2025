@@ -5,10 +5,11 @@ enum RoomType{
 	Wide = 1,
 	Narrow = 2
 }
-
+@export var place: String = "Unnamed Place"
 @export var room_type: RoomType = RoomType.Square
 @export var min_x: float = min_default
 @export var max_x: float = max_default
+@export var y_offset: float = 240
 
 const min_default: float = -560
 const max_default: float = 560

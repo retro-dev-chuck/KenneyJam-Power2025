@@ -16,9 +16,10 @@ var audio_pool: Array[AudioStreamPlayer2D] = []
 var audio_index := 0
 var bounce_cooldown: float = 0.0
 
+var _can_control: bool = false
 func _ready() -> void:
 	current_damage = damage.duplicate(true)
-	velocity = v
+	EventBus.disable_controls.connect(_disable)
 	for i in max_simultaneous_bounces:
 		var player = AudioStreamPlayer2D.new()
 		player.stream = regular_bounce_sfx
@@ -27,7 +28,22 @@ func _ready() -> void:
 		add_child(player)
 		audio_pool.append(player)
 
+
+func _disable() -> void:
+	_can_control = false
+	
+func _enable() -> void:
+	_can_control = true
+
+func _input(_event: InputEvent) -> void:
+	if Input.is_action_just_pressed("Interact") and not _can_control and not State.is_story_playing:
+		_can_control = true
+		velocity = v
+
 func _physics_process(delta: float) -> void:
+	if not _can_control:
+		velocity = Vector2.ZERO
+		return
 	if bounce_cooldown > 0.0:
 		bounce_cooldown -= delta
 	var collision = move_and_collide(velocity * speed * delta, true)

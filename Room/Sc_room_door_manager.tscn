@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://c64xuihseiwto"]
+
+[ext_resource type="Script" uid="uid://b71r1d1prwl3e" path="res://Room/RoomDoorManager.gd" id="1_447ac"]
+[ext_resource type="AudioStream" uid="uid://bfio107yx64wa" path="res://Room/DoorOpen.wav" id="2_acnbp"]
+
+[node name="RoomDoorManager" type="Node2D" node_paths=PackedStringArray("audio_player")]
+script = ExtResource("1_447ac")
+open_door = ExtResource("2_acnbp")
+audio_player = NodePath("AudioStreamPlayer2D")
+metadata/_custom_type_script = "uid://b71r1d1prwl3e"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]

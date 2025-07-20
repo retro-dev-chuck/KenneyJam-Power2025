@@ -4,8 +4,10 @@ class_name Door extends Node2D
 @export var open: Node2D
 @export var locked: Node2D
 
+@export var current_state: DoorState = DoorState.Closed
+
 enum DoorState{
-	Closed = 1,
+	Closed = 0,
 	Open = 1,
 	Locked = 2
 }
