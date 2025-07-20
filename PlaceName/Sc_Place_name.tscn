@@ -1,11 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://dv753n8msmjs"]
+[gd_scene load_steps=7 format=3 uid="uid://dv753n8msmjs"]
 
-[ext_resource type="FontFile" uid="uid://d0so0m7o3ud3p" path="res://Minecraft.ttf" id="1_g1i6a"]
 [ext_resource type="Script" uid="uid://gmvgnmwtjrff" path="res://PlaceName/PlaceName.gd" id="1_nbulh"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_nbulh"]
-font = ExtResource("1_g1i6a")
-font_size = 14
+[ext_resource type="LabelSettings" uid="uid://b5cgn6eimk500" path="res://PlaceName/LabelSettings.tres" id="2_nbulh"]
 
 [sub_resource type="Animation" id="Animation_2i3w2"]
 length = 0.001
@@ -99,7 +95,7 @@ theme_override_constants/margin_bottom = 6
 [node name="Label" type="Label" parent="PanelContainer/MarginContainer"]
 layout_mode = 2
 text = "Training Grounds"
-label_settings = SubResource("LabelSettings_nbulh")
+label_settings = ExtResource("2_nbulh")
 horizontal_alignment = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

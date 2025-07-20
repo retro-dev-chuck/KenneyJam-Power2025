@@ -17,9 +17,13 @@ var audio_index := 0
 var bounce_cooldown: float = 0.0
 
 var _can_control: bool = false
+var init_pos: Vector2
+
 func _ready() -> void:
+	init_pos = global_position
 	current_damage = damage.duplicate(true)
 	EventBus.disable_controls.connect(_disable)
+	RoomManager.room_updated.connect(_reset_pos)
 	for i in max_simultaneous_bounces:
 		var player = AudioStreamPlayer2D.new()
 		player.stream = regular_bounce_sfx
@@ -28,6 +32,8 @@ func _ready() -> void:
 		add_child(player)
 		audio_pool.append(player)
 
+func _reset_pos(r: Room) -> void:
+	global_position = init_pos
 
 func _disable() -> void:
 	_can_control = false
@@ -36,7 +42,7 @@ func _enable() -> void:
 	_can_control = true
 
 func _input(_event: InputEvent) -> void:
-	if Input.is_action_just_pressed("Interact") and not _can_control and not State.is_story_playing:
+	if Input.is_action_just_pressed("Interact") and not _can_control and not State.is_story_playing and not State.is_selecting_door:
 		_can_control = true
 		velocity = v
 

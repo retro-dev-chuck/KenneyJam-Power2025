@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://cpsamb63mjcc3"]
+[gd_scene load_steps=7 format=3 uid="uid://cpsamb63mjcc3"]
 
 [ext_resource type="Script" uid="uid://dkkkm4dfdqgpv" path="res://Room/Door.gd" id="1_3l55v"]
 [ext_resource type="Texture2D" uid="uid://qstcirkv2mbb" path="res://Wall/monochrome_tilemap.png" id="2_6inil"]
+[ext_resource type="LabelSettings" uid="uid://b5cgn6eimk500" path="res://PlaceName/LabelSettings.tres" id="3_giqku"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hrmm3"]
 atlas = ExtResource("2_6inil")
@@ -15,11 +16,12 @@ region = Rect2(272, 34, 16, 16)
 atlas = ExtResource("2_6inil")
 region = Rect2(306, 34, 16, 16)
 
-[node name="Door" type="Node2D" node_paths=PackedStringArray("closed", "open", "locked")]
+[node name="Door" type="Node2D" node_paths=PackedStringArray("closed", "open", "locked", "label")]
 script = ExtResource("1_3l55v")
 closed = NodePath("DoorClosed")
 open = NodePath("DoorOpen")
 locked = NodePath("DoorLocked")
+label = NodePath("DoorNo")
 metadata/_custom_type_script = "uid://dkkkm4dfdqgpv"
 
 [node name="DoorLocked" type="Sprite2D" parent="."]
@@ -32,3 +34,14 @@ texture = SubResource("AtlasTexture_m1k8a")
 [node name="DoorOpen" type="Sprite2D" parent="."]
 visible = false
 texture = SubResource("AtlasTexture_iwvt8")
+
+[node name="DoorNo" type="Label" parent="."]
+visible = false
+offset_left = -19.0
+offset_top = 8.0
+offset_right = 21.0
+offset_bottom = 31.0
+text = "[1]"
+label_settings = ExtResource("3_giqku")
+horizontal_alignment = 1
+vertical_alignment = 1

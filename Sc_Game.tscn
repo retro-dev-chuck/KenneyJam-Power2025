@@ -1,9 +1,9 @@
-[gd_scene load_steps=18 format=4 uid="uid://70llbdht1p16"]
+[gd_scene load_steps=20 format=4 uid="uid://70llbdht1p16"]
 
 [ext_resource type="PackedScene" uid="uid://qlr6k53fxjyt" path="res://BallsAndPaddles/Sc_Player_paddle.tscn" id="1_k4ptf"]
 [ext_resource type="Script" uid="uid://cgce51an1tusg" path="res://Room/RoomTransition.gd" id="1_lr1gu"]
 [ext_resource type="Script" uid="uid://br4n2jghtbi5v" path="res://GameFlow/ControlManager.gd" id="1_xyxtj"]
-[ext_resource type="PackedScene" uid="uid://dxow81i707mc8" path="res://_AllRooms/Sc_Room_Tutorial.tscn" id="2_dub4w"]
+[ext_resource type="PackedScene" uid="uid://kqdph2hkrbdf" path="res://_AllRooms/Sc_Room_Tutorial.tscn" id="2_dub4w"]
 [ext_resource type="TileSet" uid="uid://b35svwmldblav" path="res://Wall/Tiles.tres" id="2_q5aj8"]
 [ext_resource type="Script" uid="uid://bmcmfi528f67e" path="res://addons/shaker/src/Vector2/shaker_component2D.gd" id="4_dub4w"]
 [ext_resource type="PackedScene" uid="uid://brjikqampi8e2" path="res://Ball/Sc_Ball.tscn" id="5_gqm5n"]
@@ -13,6 +13,8 @@
 [ext_resource type="Script" uid="uid://cc133inw66me8" path="res://addons/shaker/data/Vector2/ShakerPreset2D.gd" id="8_kll0j"]
 [ext_resource type="PackedScene" uid="uid://cei01vwmfkx0n" path="res://Tutorial/Story/Pre_StoryCanvas.tscn" id="10_dub4w"]
 [ext_resource type="Script" uid="uid://cvjxliomyamki" path="res://Tutorial/Story/Story.gd" id="11_hqqmn"]
+[ext_resource type="LabelSettings" uid="uid://b5cgn6eimk500" path="res://PlaceName/LabelSettings.tres" id="14_kll0j"]
+[ext_resource type="Script" uid="uid://l7i61iddc0nh" path="res://Room/DoorSelectText.gd" id="15_i3lgx"]
 
 [sub_resource type="Resource" id="Resource_i3lgx"]
 script = ExtResource("6_7pce6")
@@ -64,8 +66,9 @@ metadata/_custom_type_script = "uid://cc133inw66me8"
 
 [node name="Game" type="Node2D"]
 
-[node name="ControlManager" type="Node2D" parent="."]
+[node name="ControlManager" type="Node2D" parent="." node_paths=PackedStringArray("room_transition")]
 script = ExtResource("1_xyxtj")
+room_transition = NodePath("../RoomTransition")
 metadata/_custom_type_script = "uid://br4n2jghtbi5v"
 
 [node name="BG_Black" type="TileMapLayer" parent="."]
@@ -75,6 +78,7 @@ tile_set = ExtResource("2_q5aj8")
 [node name="RoomTransition" type="Node2D" parent="."]
 script = ExtResource("1_lr1gu")
 start_room = ExtResource("2_dub4w")
+rooms = Array[PackedScene]([ExtResource("2_dub4w")])
 metadata/_custom_type_script = "uid://cgce51an1tusg"
 
 [node name="Player_Paddle" parent="." instance=ExtResource("1_k4ptf")]
@@ -114,3 +118,17 @@ unique_name_in_owner = true
 script = ExtResource("11_hqqmn")
 ui = NodePath("../Story_CanvasLayer")
 metadata/_custom_type_script = "uid://cvjxliomyamki"
+
+[node name="Label_DoorSelect" type="Label" parent="."]
+visible = false
+offset_left = -53.0
+offset_top = -236.0
+offset_right = 52.0
+offset_bottom = -203.0
+text = "Press 1, 2, 3
+to select a door"
+label_settings = ExtResource("14_kll0j")
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("15_i3lgx")
+metadata/_custom_type_script = "uid://l7i61iddc0nh"
